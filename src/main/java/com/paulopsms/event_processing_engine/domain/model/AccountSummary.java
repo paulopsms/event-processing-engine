@@ -1,16 +1,10 @@
 package com.paulopsms.event_processing_engine.domain.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-@Entity
-@Table(name = "account_summary")
 public class AccountSummary {
 
-	@Id
 	private String accountId;
 
 	private BigDecimal balance;

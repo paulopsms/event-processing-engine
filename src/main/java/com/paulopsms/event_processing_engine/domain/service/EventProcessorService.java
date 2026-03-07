@@ -7,6 +7,9 @@ import com.paulopsms.event_processing_engine.domain.model.EventIssue;
 import com.paulopsms.event_processing_engine.domain.repository.EventIssueRepository;
 import com.paulopsms.event_processing_engine.domain.repository.EventRepository;
 
+import static com.paulopsms.event_processing_engine.domain.enums.DeduplicationResult.CONFLICT;
+import static com.paulopsms.event_processing_engine.domain.enums.DeduplicationResult.OK;
+
 public class EventProcessorService {
 
 	private final DeduplicationService deduplicationService;
@@ -25,12 +28,18 @@ public class EventProcessorService {
 
 	public void process(Event event) {
 
-		DeduplicationResult deduplicationResult = deduplicationService.checkDeduplication(event);
+		DeduplicationResult result = deduplicationService.checkDeduplication(event);
 
-		if (!DeduplicationResult.OK.equals(deduplicationResult)) {
-			EventIssue duplicateEventIssue = EventIssueFactory.createEventIssue(event.getEventId(), deduplicationResult);
+		if (!OK.equals(result)) {
+			EventIssue eventIssue = EventIssueFactory.createEventIssue(event.getEventId(), result);
 
-			this.saveIssue(duplicateEventIssue);
+			this.saveIssue(eventIssue);
+
+			if (CONFLICT.equals(result)) {
+				this.eventRepository.deleteByEventId(event.getEventId());
+
+				this.accountSummaryService.recalculateSummary(event);
+			}
 		} else {
 			this.eventRepository.save(event);
 

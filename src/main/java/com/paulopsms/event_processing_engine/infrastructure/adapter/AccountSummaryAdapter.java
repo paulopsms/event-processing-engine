@@ -6,7 +6,10 @@ import com.paulopsms.event_processing_engine.infrastructure.persistence.entity.A
 import com.paulopsms.event_processing_engine.infrastructure.persistence.mapper.AccountSummaryMapper;
 import com.paulopsms.event_processing_engine.infrastructure.persistence.repository.AccountSummaryJpaRepository;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class AccountSummaryAdapter implements AccountSummaryRepository {
 
@@ -28,5 +31,12 @@ public class AccountSummaryAdapter implements AccountSummaryRepository {
 		AccountSummaryEntity accountSummaryEntity = this.accountSummaryMapper.toEntity(summary);
 
 		this.accountSummaryJpaRepository.save(accountSummaryEntity);
+	}
+
+	@Override
+	public List<AccountSummary> findAll() {
+		return this.accountSummaryJpaRepository.findAll().stream()
+				.map(this.accountSummaryMapper::toModel)
+				.collect(Collectors.toList());
 	}
 }
