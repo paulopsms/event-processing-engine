@@ -6,6 +6,7 @@ import com.paulopsms.event_processing_engine.infrastructure.persistence.entity.E
 import com.paulopsms.event_processing_engine.infrastructure.persistence.mapper.EventMapper;
 import com.paulopsms.event_processing_engine.infrastructure.persistence.repository.EventJpaRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public class EventAdapter implements EventRepository {
@@ -28,5 +29,15 @@ public class EventAdapter implements EventRepository {
 		EventEntity eventEntity = this.eventMapper.toEntity(event);
 
 		this.eventJpaRepository.save(eventEntity);
+	}
+
+	@Override
+	public void deleteByEventId(String eventId) {
+		this.eventJpaRepository.deleteById(eventId);
+	}
+
+	@Override
+	public List<Event> findByAccountIdOrderByOcurredAt(String accountId) {
+		return this.eventJpaRepository.findByAccountIdOrderByOcurredAt(accountId);
 	}
 }
