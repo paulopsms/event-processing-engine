@@ -1,6 +1,5 @@
 package com.paulopsms.event_processing_engine.domain.repository;
 
-import com.paulopsms.event_processing_engine.domain.model.Event;
 import com.paulopsms.event_processing_engine.domain.model.EventIssue;
 
 import java.util.Optional;

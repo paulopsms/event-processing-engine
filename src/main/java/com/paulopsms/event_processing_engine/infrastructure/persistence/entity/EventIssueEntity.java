@@ -18,19 +18,7 @@ public class EventIssueEntity {
 	@JoinColumn(name = "uuid")
 	private EventEntity event;
 	private IssueType type;
-	private String description;
 	private LocalDateTime detectedAt;
-
-	public EventIssueEntity() {
-	}
-
-	public EventIssueEntity(UUID issueId, EventEntity event, IssueType type, String description, LocalDateTime detectedAt) {
-		this.issueId = issueId;
-		this.event = event;
-		this.type = type;
-		this.description = description;
-		this.detectedAt = detectedAt;
-	}
 
 	public UUID getIssueId() {
 		return issueId;
@@ -54,14 +42,6 @@ public class EventIssueEntity {
 
 	public void setType(IssueType type) {
 		this.type = type;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	public LocalDateTime getDetectedAt() {

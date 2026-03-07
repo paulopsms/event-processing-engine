@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.math.BigDecimal;
+import java.util.Objects;
 
 @Entity
 @Table(name = "account_summary")
@@ -98,23 +99,34 @@ public class AccountSummary {
 	}
 
 	public void apply(Event event) {
-		if (event.isCredit()) {
-			this.addBalance(event);
-			
-			this.addTotalCredits(event);
-			
-			this.incrementValidEvents();
-		} else if (event.isDebit()) {
-			if (this.balanceLessThanDebitAmount(event)) {
-				this.incrementConflictEvents();
-				
-				return;
-			}
 
-			this.subtractBalance(event);
-			this.addTotalDebits(event);
-			this.incrementValidEvents();
+		Objects.requireNonNull(event, "Event is required.");
+
+		if (event.isCredit()) {
+			this.applyCredit(event);
+		} else if (event.isDebit()) {
+			this.applyDebit(event);
 		}
+	}
+
+	private void applyCredit(Event event) {
+		this.addBalance(event);
+
+		this.addTotalCredits(event);
+
+		this.incrementValidEvents();
+	}
+
+	private void applyDebit(Event event) {
+		if (this.balanceLessThanDebitAmount(event)) {
+			this.incrementConflictEvents();
+
+			return;
+		}
+
+		this.subtractBalance(event);
+		this.addTotalDebits(event);
+		this.incrementValidEvents();
 	}
 
 	private boolean balanceLessThanDebitAmount(Event event) {

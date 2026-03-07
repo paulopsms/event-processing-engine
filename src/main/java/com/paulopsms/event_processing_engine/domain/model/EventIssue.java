@@ -10,18 +10,16 @@ public class EventIssue {
 	private UUID issueId;
 	private String eventId;
 	private IssueType type;
-	private String description;
 	private LocalDateTime detectedAt;
 
 	public EventIssue() {
 	}
 
-	public EventIssue(String eventId, IssueType type, String description, LocalDateTime detectedAt) {
+	public EventIssue(String eventId, IssueType type) {
 		this.issueId = UUID.randomUUID();
 		this.eventId = eventId;
 		this.type = type;
-		this.description = description;
-		this.detectedAt = detectedAt;
+		this.detectedAt = LocalDateTime.now();
 	}
 
 	public UUID getIssueId() {
@@ -46,14 +44,6 @@ public class EventIssue {
 
 	public void setType(IssueType type) {
 		this.type = type;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	public LocalDateTime getDetectedAt() {
