@@ -17,6 +17,7 @@ public class Event {
 	private BigDecimal amount;
 
 	public Event() {
+		this.id = UUID.randomUUID();
 	}
 
 	public Event(String eventId, String accountId, LocalDateTime ocurredAt, EventType type, BigDecimal amount) {

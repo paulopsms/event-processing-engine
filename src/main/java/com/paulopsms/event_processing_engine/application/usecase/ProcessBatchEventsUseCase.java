@@ -5,11 +5,11 @@ import com.paulopsms.event_processing_engine.domain.service.EventProcessorServic
 
 import java.util.List;
 
-public class ProcessBatchEventsuseCase {
+public class ProcessBatchEventsUseCase {
 
 	private final EventProcessorService eventProcessorService;
 
-	public ProcessBatchEventsuseCase(EventProcessorService eventProcessorService) {
+	public ProcessBatchEventsUseCase(EventProcessorService eventProcessorService) {
 		this.eventProcessorService = eventProcessorService;
 	}
 

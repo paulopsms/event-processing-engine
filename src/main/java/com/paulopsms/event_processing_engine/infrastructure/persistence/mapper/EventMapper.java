@@ -8,7 +8,7 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.FIELD)
 public interface EventMapper {
 
-    Event toModel(EventEntity entity);
+	Event toModel(EventEntity entity);
 
-    EventEntity toEntity(Event dto);
+	EventEntity toEntity(Event dto);
 }
