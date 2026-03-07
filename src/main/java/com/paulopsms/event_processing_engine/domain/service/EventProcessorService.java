@@ -12,12 +12,15 @@ public class EventProcessorService {
 	private final DeduplicationService deduplicationService;
 	private final EventRepository eventRepository;
 	private final EventIssueRepository eventIssueRepository;
+	private final AccountSummaryService accountSummaryService;
 
 
-	public EventProcessorService(DeduplicationService deduplicationService, EventRepository eventRepository, EventIssueRepository eventIssueRepository) {
+	public EventProcessorService(DeduplicationService deduplicationService, EventRepository eventRepository,
+								 EventIssueRepository eventIssueRepository, AccountSummaryService accountSummaryService) {
 		this.deduplicationService = deduplicationService;
 		this.eventRepository = eventRepository;
 		this.eventIssueRepository = eventIssueRepository;
+		this.accountSummaryService = accountSummaryService;
 	}
 
 	public void process(Event event) {
@@ -31,7 +34,7 @@ public class EventProcessorService {
 		} else {
 			this.eventRepository.save(event);
 
-			// TODO aggregate?
+			this.accountSummaryService.aggregate(event);
 		}
 	}
 
