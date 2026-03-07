@@ -2,8 +2,8 @@ package com.paulopsms.event_processing_engine.domain.service;
 
 import com.paulopsms.event_processing_engine.domain.enums.DeduplicationResult;
 import com.paulopsms.event_processing_engine.domain.factory.EventIssueFactory;
-import com.paulopsms.event_processing_engine.domain.model.event.Event;
-import com.paulopsms.event_processing_engine.domain.model.event.EventIssue;
+import com.paulopsms.event_processing_engine.domain.model.Event;
+import com.paulopsms.event_processing_engine.domain.model.EventIssue;
 import com.paulopsms.event_processing_engine.domain.repository.EventIssueRepository;
 import com.paulopsms.event_processing_engine.domain.repository.EventRepository;
 

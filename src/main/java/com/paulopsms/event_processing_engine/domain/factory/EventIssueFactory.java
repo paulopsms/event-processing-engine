@@ -2,7 +2,7 @@ package com.paulopsms.event_processing_engine.domain.factory;
 
 import com.paulopsms.event_processing_engine.domain.enums.DeduplicationResult;
 import com.paulopsms.event_processing_engine.domain.enums.IssueType;
-import com.paulopsms.event_processing_engine.domain.model.event.EventIssue;
+import com.paulopsms.event_processing_engine.domain.model.EventIssue;
 import com.paulopsms.event_processing_engine.shared.exception.BusinessException;
 
 import static com.paulopsms.event_processing_engine.domain.enums.DeduplicationResult.DUPLICATE;
