@@ -1,4 +1,4 @@
-package com.paulopsms.event_processing_engine.domain.model.event;
+package com.paulopsms.event_processing_engine.domain.model;
 
 import com.paulopsms.event_processing_engine.domain.enums.IssueType;
 

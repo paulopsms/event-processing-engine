@@ -1,4 +1,4 @@
-package com.paulopsms.event_processing_engine.domain.model.event;
+package com.paulopsms.event_processing_engine.domain.model;
 
 import com.paulopsms.event_processing_engine.domain.enums.EventType;
 import com.paulopsms.event_processing_engine.shared.exception.EventException;
@@ -81,5 +81,13 @@ public class Event {
 
 	public boolean isAmountNegative() {
 		return this.amount.compareTo(BigDecimal.ZERO) <= 0;
+	}
+
+	public boolean isCredit() {
+		return EventType.CREDIT.equals(this.type);
+	}
+
+	public boolean isDebit() {
+		return EventType.DEBIT.equals(this.type);
 	}
 }

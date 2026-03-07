@@ -1,6 +1,6 @@
 package com.paulopsms.event_processing_engine.infrastructure.persistence.mapper;
 
-import com.paulopsms.event_processing_engine.domain.model.event.Event;
+import com.paulopsms.event_processing_engine.domain.model.Event;
 import com.paulopsms.event_processing_engine.infrastructure.persistence.entity.EventEntity;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
