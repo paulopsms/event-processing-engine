@@ -1,7 +1,7 @@
 package com.paulopsms.event_processing_engine.domain.model;
 
 import com.paulopsms.event_processing_engine.domain.enums.EventType;
-import com.paulopsms.event_processing_engine.shared.exception.EventException;
+import com.paulopsms.event_processing_engine.shared.exception.BusinessException;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -28,7 +28,7 @@ public class Event {
 		this.amount = amount;
 
 		if (this.isAmountNegative())
-			throw new EventException("Amount must be positive.");
+			throw new BusinessException("Amount must be positive.");
 	}
 
 	public UUID getId() {
