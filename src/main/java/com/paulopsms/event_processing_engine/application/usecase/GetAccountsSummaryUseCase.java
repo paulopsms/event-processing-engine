@@ -1,19 +1,19 @@
 package com.paulopsms.event_processing_engine.application.usecase;
 
 import com.paulopsms.event_processing_engine.domain.model.AccountSummary;
-import com.paulopsms.event_processing_engine.domain.service.AccountSummaryService;
+import com.paulopsms.event_processing_engine.domain.service.GetAccountSummaryService;
 
 import java.util.List;
 
 public class GetAccountsSummaryUseCase {
 
-	private final AccountSummaryService accountSummaryService;
+	private final GetAccountSummaryService getAccountSummaryService;
 
-	public GetAccountsSummaryUseCase(AccountSummaryService accountSummaryService) {
-		this.accountSummaryService = accountSummaryService;
+	public GetAccountsSummaryUseCase(GetAccountSummaryService getAccountSummaryService) {
+		this.getAccountSummaryService = getAccountSummaryService;
 	}
 
 	public List<AccountSummary> listSummaries() {
-		return this.accountSummaryService.findAllAccountSummaries();
+		return this.getAccountSummaryService.findAllAccountSummaries();
 	}
 }

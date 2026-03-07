@@ -26,10 +26,6 @@ public class AccountSummaryService {
 		this.accountSummaryRepository.save(summary);
 	}
 
-	public List<AccountSummary> findAllAccountSummaries() {
-		return this.accountSummaryRepository.findAll();
-	}
-
 	public void recalculateSummary(Event event) {
 		List<Event> events = this.eventRepository.findByAccountIdOrderByOcurredAt(event.getAccountId());
 
