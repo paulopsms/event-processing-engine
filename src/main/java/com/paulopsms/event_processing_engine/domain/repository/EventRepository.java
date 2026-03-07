@@ -9,4 +9,6 @@ public interface EventRepository {
 	Optional<Event> findById(String eventId);
 
 	void save(Event event);
+
+	Optional<Event> findByEventId(String eventId);
 }

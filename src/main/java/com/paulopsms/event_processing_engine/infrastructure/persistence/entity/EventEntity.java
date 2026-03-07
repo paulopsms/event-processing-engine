@@ -1,7 +1,6 @@
 package com.paulopsms.event_processing_engine.infrastructure.persistence.entity;
 
 import com.paulopsms.event_processing_engine.domain.enums.EventType;
-import com.paulopsms.event_processing_engine.shared.exception.EventException;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

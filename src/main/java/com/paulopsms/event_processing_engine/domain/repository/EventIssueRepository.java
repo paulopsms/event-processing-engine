@@ -1,10 +1,8 @@
 package com.paulopsms.event_processing_engine.domain.repository;
 
-import com.paulopsms.event_processing_engine.domain.model.event.Event;
-
-import java.util.Optional;
+import com.paulopsms.event_processing_engine.domain.model.event.EventIssue;
 
 public interface EventIssueRepository {
 
-	void save(Event event);
+	void save(EventIssue eventIssue);
 }
