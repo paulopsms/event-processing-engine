@@ -6,7 +6,10 @@ import com.paulopsms.event_processing_engine.infrastructure.persistence.entity.E
 import com.paulopsms.event_processing_engine.infrastructure.persistence.mapper.EventIssueMapper;
 import com.paulopsms.event_processing_engine.infrastructure.persistence.repository.EventIssueJpaRepository;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class EventIssueAdapter implements EventIssueRepository {
 
@@ -28,5 +31,10 @@ public class EventIssueAdapter implements EventIssueRepository {
 		EventIssueEntity eventIssueEntity = this.eventIssueMapper.toEntity(eventIssue);
 
 		this.eventIssueJpaRepository.save(eventIssueEntity);
+	}
+
+	@Override
+	public List<EventIssue> findAll() {
+		return this.eventIssueJpaRepository.findAll().stream().map(this.eventIssueMapper::toModel).collect(Collectors.toList());
 	}
 }
