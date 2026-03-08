@@ -2,34 +2,14 @@ package com.paulopsms.event_processing_engine.domain.service;
 
 import com.paulopsms.event_processing_engine.domain.enums.DeduplicationResult;
 import com.paulopsms.event_processing_engine.domain.model.Event;
-import com.paulopsms.event_processing_engine.domain.repository.EventRepository;
-
-import java.util.Optional;
 
 public class DeduplicationService {
 
-	private final EventRepository eventRepository;
-
-	public DeduplicationService(EventRepository eventRepository) {
-		this.eventRepository = eventRepository;
-	}
-
-	public DeduplicationResult checkDeduplication(Event event) {
-		Optional<Event> optionalEventFound = eventRepository.findByEventId(event.getEventId());
-
-		return optionalEventFound
-				.map(found -> this.validateExistingEvent(event, found))
-				.orElse(DeduplicationResult.OK);
-	}
-
-
-	private DeduplicationResult validateExistingEvent(Event event, Event eventFound) {
-		if (eventFound.equals(event)) {
+	public DeduplicationResult validateExistingEvent(Event existingEvent, Event newEvent) {
+		if (newEvent.equals(existingEvent)) {
 			return DeduplicationResult.DUPLICATE;
 		} else {
 			return DeduplicationResult.CONFLICT;
 		}
 	}
-
-
 }

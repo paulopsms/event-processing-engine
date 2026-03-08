@@ -1,7 +1,6 @@
 package com.paulopsms.event_processing_engine.domain.enums;
 
 public enum DeduplicationResult {
-	OK,
 	DUPLICATE,
 	CONFLICT
 }

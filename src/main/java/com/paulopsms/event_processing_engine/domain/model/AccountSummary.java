@@ -156,4 +156,13 @@ public class AccountSummary {
 	}
 
 
+	public void applyRollback(Event event) {
+		Objects.requireNonNull(event, "Event is required for rollback.");
+
+		if (event.isCredit()) {
+			this.applyDebit(event);
+		} else if (event.isDebit()) {
+			this.applyCredit(event);
+		}
+	}
 }
