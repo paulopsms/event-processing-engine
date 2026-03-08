@@ -45,8 +45,8 @@ public class EventBeanConfiguration {
 	}
 
 	@Bean
-	public DeduplicationService createDeduplicationService(EventRepository eventRepository) {
-		return new DeduplicationService(eventRepository);
+	public DeduplicationService createDeduplicationService() {
+		return new DeduplicationService();
 	}
 
 	@Bean

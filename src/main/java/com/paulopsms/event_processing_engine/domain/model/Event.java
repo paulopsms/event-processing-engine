@@ -5,6 +5,7 @@ import com.paulopsms.event_processing_engine.shared.exception.BusinessException;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.UUID;
 
 public class Event {
@@ -56,7 +57,7 @@ public class Event {
 		this.accountId = accountId;
 	}
 
-	public LocalDateTime getOcurredAt() {
+	public LocalDateTime getOccurredAt() {
 		return ocurredAt;
 	}
 
@@ -90,5 +91,12 @@ public class Event {
 
 	public boolean isDebit() {
 		return EventType.DEBIT.equals(this.type);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == null || getClass() != o.getClass()) return false;
+		Event event = (Event) o;
+		return Objects.equals(eventId, event.eventId) && Objects.equals(accountId, event.accountId) && Objects.equals(ocurredAt, event.ocurredAt) && type == event.type && Objects.equals(amount, event.amount);
 	}
 }
