@@ -6,6 +6,7 @@ import com.paulopsms.event_processing_engine.application.usecase.GetAccountsSumm
 import com.paulopsms.event_processing_engine.domain.model.AccountSummary;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +24,7 @@ public class AccountSummaryController {
 	}
 
 	@GetMapping("summary")
-	public ResponseEntity<List<AccountSummaryResponse>> listAllSummaries() {
+	public ResponseEntity<List<AccountSummaryResponse>> listAllSummaries(@RequestHeader(value = "X-Correlation-Id", required = false) String correlationId) {
 		List<AccountSummary> accountSummaries = this.getAccountsSummaryUseCase.listSummaries();
 
 		List<AccountSummaryResponse> summaries = accountSummaries

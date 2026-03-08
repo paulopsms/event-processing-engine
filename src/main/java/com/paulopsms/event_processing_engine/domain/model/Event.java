@@ -1,7 +1,7 @@
 package com.paulopsms.event_processing_engine.domain.model;
 
 import com.paulopsms.event_processing_engine.domain.enums.EventType;
-import com.paulopsms.event_processing_engine.shared.exception.BusinessException;
+import com.paulopsms.event_processing_engine.shared.exception.BusinessRuntimeException;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -30,7 +30,7 @@ public class Event {
 		this.amount = amount;
 
 		if (this.isAmountNegative())
-			throw new BusinessException("Amount must be positive.");
+			throw new BusinessRuntimeException("Amount must be positive.");
 	}
 
 	public UUID getId() {
@@ -98,5 +98,16 @@ public class Event {
 		if (o == null || getClass() != o.getClass()) return false;
 		Event event = (Event) o;
 		return Objects.equals(eventId, event.eventId) && Objects.equals(accountId, event.accountId) && Objects.equals(ocurredAt, event.ocurredAt) && type == event.type && Objects.equals(amount, event.amount);
+	}
+
+	@Override
+	public String toString() {
+		return "Event{" +
+				"eventId='" + eventId + '\'' +
+				", accountId='" + accountId + '\'' +
+				", ocurredAt=" + ocurredAt +
+				", type=" + type +
+				", amount=" + amount +
+				'}';
 	}
 }

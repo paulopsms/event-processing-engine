@@ -6,6 +6,7 @@ import com.paulopsms.event_processing_engine.application.usecase.GetEventIssuesU
 import com.paulopsms.event_processing_engine.domain.model.EventIssue;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +24,7 @@ public class EventIssueController {
 	}
 
 	@GetMapping("issues")
-	public ResponseEntity<List<EventIssueResponse>> listEventIssues() {
+	public ResponseEntity<List<EventIssueResponse>> listEventIssues(@RequestHeader(value = "X-Correlation-Id", required = false) String correlationId) {
 		List<EventIssue> issues = this.getEventIssuesUseCase.listAllSummaries();
 
 		List<EventIssueResponse> issuesList = issues.stream()
