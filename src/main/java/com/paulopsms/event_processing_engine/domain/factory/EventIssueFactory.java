@@ -3,10 +3,7 @@ package com.paulopsms.event_processing_engine.domain.factory;
 import com.paulopsms.event_processing_engine.domain.enums.DeduplicationResult;
 import com.paulopsms.event_processing_engine.domain.enums.IssueType;
 import com.paulopsms.event_processing_engine.domain.model.EventIssue;
-import com.paulopsms.event_processing_engine.shared.exception.BusinessException;
-
-import static com.paulopsms.event_processing_engine.domain.enums.DeduplicationResult.CONFLICT;
-import static com.paulopsms.event_processing_engine.domain.enums.DeduplicationResult.DUPLICATE;
+import com.paulopsms.event_processing_engine.shared.exception.BusinessRuntimeException;
 
 public class EventIssueFactory {
 
@@ -17,7 +14,7 @@ public class EventIssueFactory {
 			case CONFLICT:
 				return createEventIssueConflict(eventId);
 			default:
-				throw new BusinessException("Invalid Event Type found.");
+				throw new BusinessRuntimeException("Invalid Event Type found.");
 		}
 	}
 

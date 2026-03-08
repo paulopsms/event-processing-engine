@@ -5,10 +5,7 @@ import com.paulopsms.event_processing_engine.application.mapper.RestEventMapper;
 import com.paulopsms.event_processing_engine.application.usecase.ProcessBatchEventsUseCase;
 import com.paulopsms.event_processing_engine.domain.model.Event;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,8 +21,8 @@ public class BatchEventController {
 	}
 
 	@PostMapping("mock")
-	public ResponseEntity<Void> createEvent(@RequestBody List<EventRequest> request) {
-//											@RequestHeader(value = "X-Correlation-Id", required = false) String correlationId) {
+	public ResponseEntity<Void> createEvent(@RequestBody List<EventRequest> request,
+											@RequestHeader(value = "X-Correlation-Id", required = false) String correlationId) {
 		List<Event> events = request.stream()
 				.map(RestEventMapper::toModel)
 				.collect(Collectors.toList());
