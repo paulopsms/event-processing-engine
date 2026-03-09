@@ -1,0 +1,7 @@
+{
+  "eventId": "EVT-0001",
+  "accountId": "ACC-100",
+  "occurredAt":  "2026-02-01T10:00:00Z",
+  "type": "CREDIT",
+  "amount": 1000.00
+}
