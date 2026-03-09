@@ -32,19 +32,20 @@ public class EventProcessorService {
 	}
 
 	public void process(Event event) {
-		this.logger.info("Processing event: {}",  event);
-		Optional<Event> existingEventOptional = eventRepository.findByEventId(event.getEventId());
+		this.logger.info("Processing event: {}", event);
+		Optional<Event> existingEventOptional = this.eventRepository.findByEventId(event.getEventId());
 
-		if (!existingEventOptional.isPresent())
+		if (!existingEventOptional.isPresent()) {
 			this.createNewEvent(event);
+		} else {
+			Event existingEvent = existingEventOptional.get();
 
-		Event existingEvent = existingEventOptional.get();
-
-		this.validadeDeduplicationAndCreateEventIssue(event, existingEvent);
+			this.validadeDeduplicationAndCreateEventIssue(event, existingEvent);
+		}
 	}
 
 	private void createNewEvent(Event event) {
-		this.logger.info("The event {} is valid.",  event.getEventId());
+		this.logger.info("The event {} is valid.", event.getEventId());
 
 		this.accountSummaryService.aggregate(event);
 
@@ -68,7 +69,7 @@ public class EventProcessorService {
 	}
 
 	private EventIssue createEventIssue(Event event, DeduplicationResult result) {
-		this.logger.info("Creating event issue: eventId={}, DeduplicationResult={}",  event.getEventId(), result);
+		this.logger.info("Creating event issue: eventId={}, DeduplicationResult={}", event.getEventId(), result);
 
 		EventIssue eventIssue = EventIssueFactory.createEventIssue(event.getEventId(), result);
 
@@ -78,7 +79,7 @@ public class EventProcessorService {
 	}
 
 	private void rollbackEvent(Event event) {
-		this.logger.info("Removing event: {}",  event.getEventId());
+		this.logger.info("Removing event: {}", event.getEventId());
 
 		this.eventRepository.deleteByEventId(event.getEventId());
 

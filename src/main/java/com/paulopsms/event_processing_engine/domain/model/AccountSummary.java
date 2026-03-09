@@ -101,21 +101,15 @@ public class AccountSummary {
 	public void apply(Event event) {
 		if (isNull(event)) throw new BusinessRuntimeException("Event is required.");
 
-		if (event.isCredit()) {
-			this.applyCredit(event);
-		} else if (event.isDebit()) {
-			this.applyDebit(event);
-		}
+		if (event.isCredit()) this.applyCredit(event);
+		else if (event.isDebit()) this.applyDebit(event);
 	}
 
-	public void applyBalanceOnly(Event event) {
-		if (isNull(event)) throw new BusinessRuntimeException("Event is required.");
-
-		if (event.isCredit()) {
-			this.addBalance(event);
-		} else if (event.isDebit()) {
-			this.subtractBalance(event);
-		}
+	public void resetBalance() {
+		this.balance = BigDecimal.ZERO;
+		this.totalCredits = BigDecimal.ZERO;
+		this.totalDebits = BigDecimal.ZERO;
+		this.validEvents = 0;
 	}
 
 	private void applyCredit(Event event) {
@@ -127,17 +121,12 @@ public class AccountSummary {
 	}
 
 	private void applyDebit(Event event) {
-//		this.validateIfEnoughBalanceForDebit(event);
-
 		this.subtractBalance(event);
+
 		this.addTotalDebits(event);
+
 		this.incrementValidEvents();
 	}
-
-//	public void validateIfEnoughBalanceForDebit(Event event) {
-//		if (this.balance.compareTo(event.getAmount()) < 0)
-//			throw new BusinessRuntimeException("Low balance.");
-//	}
 
 	private void addTotalDebits(Event event) {
 		this.totalDebits = this.totalDebits.add(event.getAmount());

@@ -143,48 +143,6 @@ public class AccountSummaryTest {
 	}
 
 	@Test
-	public void whenApplyingBalanceOnlyToSummary_thenShouldIncreaseBalanceAndNotIncrementCounts() {
-		String creditEventId = "EVT-0001";
-		String creditAccountId = "ACC-001";
-		LocalDateTime creditOcurredAt = LocalDateTime.parse("2026-02-01T10:00:00");
-		EventType credit = EventType.CREDIT;
-		BigDecimal creditAmount = new BigDecimal("1000.00");
-
-		Event creditEvent = new Event(creditEventId, creditAccountId, creditOcurredAt, credit, creditAmount);
-
-		String debitEventId = "EVT-0002";
-		String debitAccountId = "ACC-001";
-		LocalDateTime debitOcurredAt = LocalDateTime.parse("2026-02-01T10:05:00");
-		EventType debit = EventType.DEBIT;
-		BigDecimal debitAmount = new BigDecimal("100.00");
-
-		Event debitEvent = new Event(debitEventId, debitAccountId, debitOcurredAt, debit, debitAmount);
-
-		assertNotNull(creditEvent.getEventId());
-		assertNotNull(debitEvent.getEventId());
-
-		AccountSummary accountSummary = new AccountSummary(creditEvent.getAccountId());
-
-		accountSummary.applyBalanceOnly(creditEvent);
-
-		assertEquals(creditAccountId, accountSummary.getAccountId());
-		assertEquals(creditAmount, accountSummary.getBalance());
-		assertEquals(BigDecimal.ZERO, accountSummary.getTotalCredits());
-		assertEquals(BigDecimal.ZERO, accountSummary.getTotalDebits());
-		assertEquals(0, accountSummary.getConflictEvents());
-		assertEquals(0, accountSummary.getValidEvents());
-
-		accountSummary.applyBalanceOnly(debitEvent);
-
-		assertEquals(debitAccountId, accountSummary.getAccountId());
-		assertEquals(creditAmount.subtract(debitAmount), accountSummary.getBalance());
-		assertEquals(BigDecimal.ZERO, accountSummary.getTotalCredits());
-		assertEquals(BigDecimal.ZERO, accountSummary.getTotalDebits());
-		assertEquals(0, accountSummary.getConflictEvents());
-		assertEquals(0, accountSummary.getValidEvents());
-	}
-
-	@Test
 	public void whenIncrementingConflitToSummary_thenShouldIncreaseSummaryConflictCount() {
 		IssueType conflict = IssueType.CONFLICT;
 

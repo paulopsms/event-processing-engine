@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 public class AccountSummaryService {
-	
+
 	public final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	private final AccountSummaryRepository accountSummaryRepository;
@@ -33,13 +33,16 @@ public class AccountSummaryService {
 	}
 
 	public void recalculateSummary(Event event) {
-		this.logger.info("Recalculating Summary for account {}",  event.getAccountId());
-		
+		this.logger.info("Recalculating Summary for account {}", event.getAccountId());
+
 		List<Event> events = this.eventRepository.findByAccountIdOrderByOcurredAt(event.getAccountId());
 
-		this.logger.info("{} events found.",  events.size());
+		this.logger.info("{} events found.", events.size());
 
-		AccountSummary summary = new AccountSummary(event.getAccountId());
+		AccountSummary summary = this.accountSummaryRepository.findByAccountId(event.getAccountId())
+				.orElseThrow(() -> new BusinessRuntimeException("Account Summary not found."));
+
+		summary.resetBalance();
 
 		events.forEach(evnt -> this.recalculate(evnt, summary));
 
@@ -47,9 +50,9 @@ public class AccountSummaryService {
 	}
 
 	private void recalculate(Event event, AccountSummary summary) {
-		this.logger.info("Recalculating Summary for event: {}",  event)	;
-		
-		summary.applyBalanceOnly(event);
+		this.logger.info("Recalculating Summary for event: {}", event);
+
+		summary.apply(event);
 	}
 
 	public void updateCount(Event event, EventIssue eventIssue) {
