@@ -5,7 +5,6 @@ import com.paulopsms.event_processing_engine.domain.enums.EventType;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -13,18 +12,20 @@ import java.util.UUID;
 public class EventEntity {
 
 	@Id
-	@Column(name = "uuid")
+	@Column(columnDefinition = "UUID")
 	private UUID id;
 
 	@Column(unique = true)
 	private String eventId;
-	private String accountId;
-	private LocalDateTime ocurredAt;
-	private EventType type;
-	private BigDecimal amount;
 
-	@OneToMany(mappedBy = "event")
-	private List<EventIssueEntity> eventIssues;
+	private String accountId;
+
+	private LocalDateTime occurredAt;
+
+	@Enumerated(EnumType.STRING)
+	private EventType type;
+
+	private BigDecimal amount;
 
 	public UUID getId() {
 		return id;
@@ -50,12 +51,12 @@ public class EventEntity {
 		this.accountId = accountId;
 	}
 
-	public LocalDateTime getOcurredAt() {
-		return ocurredAt;
+	public LocalDateTime getOccurredAt() {
+		return occurredAt;
 	}
 
-	public void setOcurredAt(LocalDateTime ocurredAt) {
-		this.ocurredAt = ocurredAt;
+	public void setOccurredAt(LocalDateTime occurredAt) {
+		this.occurredAt = occurredAt;
 	}
 
 	public EventType getType() {
@@ -78,11 +79,4 @@ public class EventEntity {
 		return this.amount.compareTo(BigDecimal.ZERO) <= 0;
 	}
 
-	public List<EventIssueEntity> getEventIssues() {
-		return eventIssues;
-	}
-
-	public void setEventIssues(List<EventIssueEntity> eventIssues) {
-		this.eventIssues = eventIssues;
-	}
 }

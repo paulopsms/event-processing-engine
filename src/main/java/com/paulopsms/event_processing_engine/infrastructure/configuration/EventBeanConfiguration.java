@@ -10,9 +10,6 @@ import com.paulopsms.event_processing_engine.domain.service.EventProcessorServic
 import com.paulopsms.event_processing_engine.infrastructure.adapter.AccountSummaryAdapter;
 import com.paulopsms.event_processing_engine.infrastructure.adapter.EventAdapter;
 import com.paulopsms.event_processing_engine.infrastructure.adapter.EventIssueAdapter;
-import com.paulopsms.event_processing_engine.infrastructure.persistence.mapper.AccountSummaryMapper;
-import com.paulopsms.event_processing_engine.infrastructure.persistence.mapper.EventIssueMapper;
-import com.paulopsms.event_processing_engine.infrastructure.persistence.mapper.EventMapper;
 import com.paulopsms.event_processing_engine.infrastructure.persistence.repository.AccountSummaryJpaRepository;
 import com.paulopsms.event_processing_engine.infrastructure.persistence.repository.EventIssueJpaRepository;
 import com.paulopsms.event_processing_engine.infrastructure.persistence.repository.EventJpaRepository;
@@ -23,19 +20,18 @@ import org.springframework.context.annotation.Configuration;
 public class EventBeanConfiguration {
 
 	@Bean
-	public EventRepository createEventRepository(EventJpaRepository eventJpaRepository, EventMapper eventMapper) {
-		return new EventAdapter(eventJpaRepository, eventMapper);
+	public EventRepository createEventRepository(EventJpaRepository eventJpaRepository) {
+		return new EventAdapter(eventJpaRepository);
 	}
 
 	@Bean
-	public EventIssueRepository createEventIssueRepository(EventIssueJpaRepository eventIssueJpaRepository, EventIssueMapper eventMapper) {
-		return new EventIssueAdapter(eventIssueJpaRepository, eventMapper);
+	public EventIssueRepository createEventIssueRepository(EventIssueJpaRepository eventIssueJpaRepository) {
+		return new EventIssueAdapter(eventIssueJpaRepository);
 	}
 
 	@Bean
-	public AccountSummaryRepository createAccountSummaryRepository(AccountSummaryJpaRepository accountSummaryJpaRepository,
-																   AccountSummaryMapper mapper) {
-		return new AccountSummaryAdapter(accountSummaryJpaRepository, mapper);
+	public AccountSummaryRepository createAccountSummaryRepository(AccountSummaryJpaRepository accountSummaryJpaRepository) {
+		return new AccountSummaryAdapter(accountSummaryJpaRepository);
 	}
 
 	@Bean

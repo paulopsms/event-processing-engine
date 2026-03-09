@@ -10,5 +10,7 @@ public interface EventJpaRepository extends JpaRepository<EventEntity, String> {
 
 	Optional<EventEntity> findByEventId(String accountId);
 
-	List<EventEntity> findByAccountIdOrderByOcurredAt(String accountId);
+	List<EventEntity> findByAccountIdOrderByOccurredAt(String accountId);
+
+	void deleteByEventId(String eventId);
 }

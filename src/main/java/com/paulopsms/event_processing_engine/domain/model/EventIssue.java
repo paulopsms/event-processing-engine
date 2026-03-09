@@ -13,6 +13,7 @@ public class EventIssue {
 	private LocalDateTime detectedAt;
 
 	public EventIssue() {
+		this.issueId = UUID.randomUUID();
 	}
 
 	public EventIssue(String eventId, IssueType type) {

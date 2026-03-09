@@ -24,13 +24,13 @@ public class DeduplicationServiceTest {
 	public void shouldReturnDuplicateWhenEventsAreEqual() {
 		String eventId = "EVT-0001";
 		String accountId = "ACC-001";
-		LocalDateTime ocurredAt = LocalDateTime.parse("2026-02-01T10:00:00");
+		LocalDateTime occurredAt = LocalDateTime.parse("2026-02-01T10:00:00");
 		EventType credit = EventType.CREDIT;
 		BigDecimal amount = new BigDecimal("1000.00");
 
-		Event existingEvent = new Event(eventId, accountId, ocurredAt, credit, amount);
+		Event existingEvent = new Event(eventId, accountId, occurredAt, credit, amount);
 
-		Event newEvent = new Event(eventId, accountId, ocurredAt, credit, amount);
+		Event newEvent = new Event(eventId, accountId, occurredAt, credit, amount);
 
 		DeduplicationResult result = this.deduplicationService.validateExistingEvent(existingEvent, newEvent);
 
@@ -41,15 +41,15 @@ public class DeduplicationServiceTest {
 	public void shouldReturnConflictWhenEventsAreDifferent() {
 		String eventId = "EVT-0001";
 		String accountId = "ACC-001";
-		LocalDateTime ocurredAt = LocalDateTime.parse("2026-02-01T10:00:00");
+		LocalDateTime occurredAt = LocalDateTime.parse("2026-02-01T10:00:00");
 		EventType credit = EventType.CREDIT;
 		BigDecimal amount = new BigDecimal("1000.00");
 
-		Event existingEvent = new Event(eventId, accountId, ocurredAt, credit, amount);
+		Event existingEvent = new Event(eventId, accountId, occurredAt, credit, amount);
 
 		EventType debit = EventType.DEBIT;
 
-		Event newEvent = new Event(eventId, accountId, ocurredAt, debit, amount);
+		Event newEvent = new Event(eventId, accountId, occurredAt, debit, amount);
 
 		DeduplicationResult result = this.deduplicationService.validateExistingEvent(existingEvent, newEvent);
 

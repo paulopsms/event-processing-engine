@@ -4,6 +4,7 @@ import com.paulopsms.event_processing_engine.domain.enums.IssueType;
 import com.paulopsms.event_processing_engine.shared.exception.BusinessRuntimeException;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 import static com.paulopsms.event_processing_engine.domain.enums.IssueType.CONFLICT;
 import static com.paulopsms.event_processing_engine.domain.enums.IssueType.DUPLICATE;
@@ -11,8 +12,8 @@ import static java.util.Objects.isNull;
 
 public class AccountSummary {
 
+	private UUID id;
 	private String accountId;
-
 	private BigDecimal balance;
 	private BigDecimal totalCredits;
 	private BigDecimal totalDebits;
@@ -21,10 +22,12 @@ public class AccountSummary {
 	private long conflictEvents;
 	private Long version;
 
-	protected AccountSummary() {
+	public AccountSummary() {
+		this.id = UUID.randomUUID();
 	}
 
 	public AccountSummary(String accountId) {
+		this.id = UUID.randomUUID();
 		this.accountId = accountId;
 		this.balance = BigDecimal.ZERO;
 		this.totalCredits = BigDecimal.ZERO;
@@ -32,6 +35,14 @@ public class AccountSummary {
 		this.validEvents = 0;
 		this.duplicateEvents = 0;
 		this.conflictEvents = 0;
+	}
+
+	public UUID getId() {
+		return id;
+	}
+
+	public void setId(UUID id) {
+		this.id = id;
 	}
 
 	public String getAccountId() {

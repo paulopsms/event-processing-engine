@@ -48,17 +48,17 @@ public class AccountSummaryServiceTest {
 	public void setup() {
 		String eventId = "EVT-0001";
 		String accountId = "ACC-001";
-		LocalDateTime ocurredAt = LocalDateTime.parse("2026-03-01T10:00:00");
+		LocalDateTime occurredAt = LocalDateTime.parse("2026-03-01T10:00:00");
 		EventType credit = EventType.CREDIT;
 		BigDecimal amount = new BigDecimal("1000.00");
 
 		String eventId2 = "EVT-0002";
-		LocalDateTime ocurredAt2 = LocalDateTime.parse("2026-03-01T10:10:00");
+		LocalDateTime occurredAt2 = LocalDateTime.parse("2026-03-01T10:10:00");
 		EventType debit = EventType.DEBIT;
 		BigDecimal amount2 = new BigDecimal("300.00");
 
-		event = new Event(eventId, accountId, ocurredAt, credit, amount);
-		event2 = new Event(eventId2, accountId, ocurredAt2, debit, amount2);
+		event = new Event(eventId, accountId, occurredAt, credit, amount);
+		event2 = new Event(eventId2, accountId, occurredAt2, debit, amount2);
 
 		this.eventIssueDuplicate = new EventIssue(eventId, IssueType.DUPLICATE);
 		this.eventIssueConflict = new EventIssue(eventId, IssueType.CONFLICT);
@@ -84,7 +84,7 @@ public class AccountSummaryServiceTest {
 	public void shouldRecalculateAccountSummary() {
 		List<Event> events = Arrays.asList(event, event2);
 
-		when(this.eventRepository.findByAccountIdOrderByOcurredAt(event.getAccountId())).thenReturn(events);
+		when(this.eventRepository.findByAccountIdOrderByOccurredAt(event.getAccountId())).thenReturn(events);
 		when(this.accountSummaryRepository.findByAccountId(event.getAccountId())).thenReturn(Optional.of(this.accountSummary));
 
 		this.accountSummaryService.recalculateSummary(event);
@@ -93,7 +93,7 @@ public class AccountSummaryServiceTest {
 		assertEquals(2, this.accountSummary.getValidEvents());
 		assertEquals(new BigDecimal("1000.00"), this.accountSummary.getTotalCredits());
 		assertEquals(new BigDecimal("300.00"), this.accountSummary.getTotalDebits());
-		verify(this.eventRepository).findByAccountIdOrderByOcurredAt(anyString());
+		verify(this.eventRepository).findByAccountIdOrderByOccurredAt(anyString());
 		verify(this.accountSummaryRepository).findByAccountId(anyString());
 		verify(this.accountSummaryRepository).save(any(AccountSummary.class));
 	}

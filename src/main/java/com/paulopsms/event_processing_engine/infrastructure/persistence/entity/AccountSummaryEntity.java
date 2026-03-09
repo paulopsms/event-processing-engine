@@ -1,89 +1,97 @@
 package com.paulopsms.event_processing_engine.infrastructure.persistence.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Version;
+import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Entity
 @Table(name = "account_summary")
 public class AccountSummaryEntity {
 
-    @Id
-    private String accountId;
+	@Id
+	@Column(columnDefinition = "UUID")
+	private UUID id;
 
-    private BigDecimal balance;
-    private BigDecimal totalCredits;
-    private BigDecimal totalDebits;
-    private long validEvents;
-    private long duplicateEvents;
-    private long conflictEvents;
+	private String accountId;
+	private BigDecimal balance;
+	private BigDecimal totalCredits;
+	private BigDecimal totalDebits;
+	private long validEvents;
+	private long duplicateEvents;
+	private long conflictEvents;
 
-    @Version
-    private Long version;
+	@Version
+	private Long version;
 
-    public String getAccountId() {
-        return accountId;
-    }
+	public UUID getId() {
+		return id;
+	}
 
-    public void setAccountId(String accountId) {
-        this.accountId = accountId;
-    }
+	public void setId(UUID id) {
+		this.id = id;
+	}
 
-    public BigDecimal getBalance() {
-        return balance;
-    }
+	public String getAccountId() {
+		return accountId;
+	}
 
-    public void setBalance(BigDecimal balance) {
-        this.balance = balance;
-    }
+	public void setAccountId(String accountId) {
+		this.accountId = accountId;
+	}
 
-    public BigDecimal getTotalCredits() {
-        return totalCredits;
-    }
+	public BigDecimal getBalance() {
+		return balance;
+	}
 
-    public void setTotalCredits(BigDecimal totalCredits) {
-        this.totalCredits = totalCredits;
-    }
+	public void setBalance(BigDecimal balance) {
+		this.balance = balance;
+	}
 
-    public BigDecimal getTotalDebits() {
-        return totalDebits;
-    }
+	public BigDecimal getTotalCredits() {
+		return totalCredits;
+	}
 
-    public void setTotalDebits(BigDecimal totalDebits) {
-        this.totalDebits = totalDebits;
-    }
+	public void setTotalCredits(BigDecimal totalCredits) {
+		this.totalCredits = totalCredits;
+	}
 
-    public long getValidEvents() {
-        return validEvents;
-    }
+	public BigDecimal getTotalDebits() {
+		return totalDebits;
+	}
 
-    public void setValidEvents(long validEvents) {
-        this.validEvents = validEvents;
-    }
+	public void setTotalDebits(BigDecimal totalDebits) {
+		this.totalDebits = totalDebits;
+	}
 
-    public long getDuplicateEvents() {
-        return duplicateEvents;
-    }
+	public long getValidEvents() {
+		return validEvents;
+	}
 
-    public void setDuplicateEvents(long duplicateEvents) {
-        this.duplicateEvents = duplicateEvents;
-    }
+	public void setValidEvents(long validEvents) {
+		this.validEvents = validEvents;
+	}
 
-    public long getConflictEvents() {
-        return conflictEvents;
-    }
+	public long getDuplicateEvents() {
+		return duplicateEvents;
+	}
 
-    public void setConflictEvents(long conflictEvents) {
-        this.conflictEvents = conflictEvents;
-    }
+	public void setDuplicateEvents(long duplicateEvents) {
+		this.duplicateEvents = duplicateEvents;
+	}
 
-    public Long getVersion() {
-        return version;
-    }
+	public long getConflictEvents() {
+		return conflictEvents;
+	}
 
-    public void setVersion(Long version) {
-        this.version = version;
-    }
+	public void setConflictEvents(long conflictEvents) {
+		this.conflictEvents = conflictEvents;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
+	}
 }

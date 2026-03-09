@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 public class EventRequest {
 	private String eventId;
 	private String accountId;
-	private LocalDateTime ocurredAt;
+	private LocalDateTime occurredAt;
 	private EventType type;
 	private BigDecimal amount;
 
@@ -28,12 +28,12 @@ public class EventRequest {
 		this.accountId = accountId;
 	}
 
-	public LocalDateTime getOcurredAt() {
-		return ocurredAt;
+	public LocalDateTime getOccurredAt() {
+		return occurredAt;
 	}
 
-	public void setOcurredAt(LocalDateTime ocurredAt) {
-		this.ocurredAt = ocurredAt;
+	public void setoccurredAt(LocalDateTime occurredAt) {
+		this.occurredAt = occurredAt;
 	}
 
 	public EventType getType() {

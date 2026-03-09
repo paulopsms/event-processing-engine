@@ -3,10 +3,9 @@ package com.paulopsms.event_processing_engine.infrastructure.adapter;
 import com.paulopsms.event_processing_engine.domain.model.AccountSummary;
 import com.paulopsms.event_processing_engine.domain.repository.AccountSummaryRepository;
 import com.paulopsms.event_processing_engine.infrastructure.persistence.entity.AccountSummaryEntity;
-import com.paulopsms.event_processing_engine.infrastructure.persistence.mapper.AccountSummaryMapper;
+import com.paulopsms.event_processing_engine.infrastructure.persistence.mapper.PersistenceAccountSummaryMapper;
 import com.paulopsms.event_processing_engine.infrastructure.persistence.repository.AccountSummaryJpaRepository;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -14,29 +13,32 @@ import java.util.stream.Collectors;
 public class AccountSummaryAdapter implements AccountSummaryRepository {
 
 	private final AccountSummaryJpaRepository accountSummaryJpaRepository;
-	private final AccountSummaryMapper accountSummaryMapper;
 
-	public AccountSummaryAdapter(AccountSummaryJpaRepository accountSummaryJpaRepository, AccountSummaryMapper accountSummaryMapper) {
+	public AccountSummaryAdapter(AccountSummaryJpaRepository accountSummaryJpaRepository) {
 		this.accountSummaryJpaRepository = accountSummaryJpaRepository;
-		this.accountSummaryMapper = accountSummaryMapper;
 	}
 
 	@Override
 	public Optional<AccountSummary> findByAccountId(String accountId) {
-		return this.accountSummaryJpaRepository.findByAccountId(accountId).map(this.accountSummaryMapper::toModel);
+		return this.accountSummaryJpaRepository.findByAccountId(accountId).map(PersistenceAccountSummaryMapper::toModel);
 	}
 
 	@Override
 	public void save(AccountSummary summary) {
-		AccountSummaryEntity accountSummaryEntity = this.accountSummaryMapper.toEntity(summary);
+		AccountSummaryEntity entity = accountSummaryJpaRepository.findByAccountId(summary.getAccountId()).orElse(null);
 
-		this.accountSummaryJpaRepository.save(accountSummaryEntity);
+		if (entity == null)
+			entity = PersistenceAccountSummaryMapper.toEntity(summary);
+		else
+			PersistenceAccountSummaryMapper.updateEntity(entity, summary);
+
+		this.accountSummaryJpaRepository.save(entity);
 	}
 
 	@Override
 	public List<AccountSummary> findAll() {
 		return this.accountSummaryJpaRepository.findAll().stream()
-				.map(this.accountSummaryMapper::toModel)
+				.map(PersistenceAccountSummaryMapper::toModel)
 				.collect(Collectors.toList());
 	}
 }

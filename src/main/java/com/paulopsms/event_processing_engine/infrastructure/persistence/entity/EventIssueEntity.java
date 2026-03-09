@@ -11,14 +11,16 @@ import java.util.UUID;
 public class EventIssueEntity {
 
 	@Id
-	@GeneratedValue
+	@Column(columnDefinition = "UUID")
 	private UUID issueId;
 
-	@ManyToOne
-	@JoinColumn(name = "uuid")
-	private EventEntity event;
+	private String eventId;
+
+	@Enumerated(EnumType.STRING)
 	private IssueType type;
+
 	private LocalDateTime detectedAt;
+
 
 	public UUID getIssueId() {
 		return issueId;
@@ -28,12 +30,12 @@ public class EventIssueEntity {
 		this.issueId = id;
 	}
 
-	public EventEntity getEvent() {
-		return event;
+	public String getEventId() {
+		return eventId;
 	}
 
-	public void setEvent(EventEntity event) {
-		this.event = event;
+	public void setEventId(String eventId) {
+		this.eventId = eventId;
 	}
 
 	public IssueType getType() {

@@ -62,11 +62,11 @@ public class AccountSummaryTest {
 	public void whenApplyingCreditEventToSummary_thenShouldIncreaseTheAccountBalance() {
 		String eventId = "EVT-0001";
 		String accountId = "ACC-001";
-		LocalDateTime ocurredAt = LocalDateTime.parse("2026-02-01T10:00:00");
+		LocalDateTime occurredAt = LocalDateTime.parse("2026-02-01T10:00:00");
 		EventType credit = EventType.CREDIT;
 		BigDecimal amount = new BigDecimal("1000.00");
 
-		Event event = new Event(eventId, accountId, ocurredAt, credit, amount);
+		Event event = new Event(eventId, accountId, occurredAt, credit, amount);
 
 		AccountSummary accountSummary = new AccountSummary(event.getAccountId());
 
@@ -84,11 +84,11 @@ public class AccountSummaryTest {
 	public void whenApplyingDebitEventToSummary_thenShouldReduceTheAccountBalance() {
 		String eventId = "EVT-0001";
 		String accountId = "ACC-001";
-		LocalDateTime ocurredAt = LocalDateTime.parse("2026-02-01T10:00:00");
+		LocalDateTime occurredAt = LocalDateTime.parse("2026-02-01T10:00:00");
 		EventType credit = EventType.DEBIT;
 		BigDecimal amount = new BigDecimal("1000.00");
 
-		Event event = new Event(eventId, accountId, ocurredAt, credit, amount);
+		Event event = new Event(eventId, accountId, occurredAt, credit, amount);
 
 		AccountSummary accountSummary = new AccountSummary(event.getAccountId());
 
@@ -104,19 +104,19 @@ public class AccountSummaryTest {
 	public void whenApplyingCreditAndDebitEventsToSummary_thenShouldIncreaseAndReduceTheAccountBalance() {
 		String creditEventId = "EVT-0001";
 		String creditAccountId = "ACC-001";
-		LocalDateTime creditOcurredAt = LocalDateTime.parse("2026-02-01T10:00:00");
+		LocalDateTime creditoccurredAt = LocalDateTime.parse("2026-02-01T10:00:00");
 		EventType credit = EventType.CREDIT;
 		BigDecimal creditAmount = new BigDecimal("1000.00");
 
-		Event creditEvent = new Event(creditEventId, creditAccountId, creditOcurredAt, credit, creditAmount);
+		Event creditEvent = new Event(creditEventId, creditAccountId, creditoccurredAt, credit, creditAmount);
 
 		String debitEventId = "EVT-0002";
 		String debitAccountId = "ACC-001";
-		LocalDateTime debitOcurredAt = LocalDateTime.parse("2026-02-01T10:05:00");
+		LocalDateTime debitoccurredAt = LocalDateTime.parse("2026-02-01T10:05:00");
 		EventType debit = EventType.DEBIT;
 		BigDecimal debitAmount = new BigDecimal("100.00");
 
-		Event debitEvent = new Event(debitEventId, debitAccountId, debitOcurredAt, debit, debitAmount);
+		Event debitEvent = new Event(debitEventId, debitAccountId, debitoccurredAt, debit, debitAmount);
 
 		assertNotNull(creditEvent.getEventId());
 		assertNotNull(debitEvent.getEventId());
@@ -148,11 +148,11 @@ public class AccountSummaryTest {
 
 		String eventId = "EVT-0001";
 		String accountId = "ACC-001";
-		LocalDateTime ocurredAt = LocalDateTime.parse("2026-02-01T10:00:00");
+		LocalDateTime occurredAt = LocalDateTime.parse("2026-02-01T10:00:00");
 		EventType credit = EventType.DEBIT;
 		BigDecimal amount = new BigDecimal("1000.00");
 
-		Event event = new Event(eventId, accountId, ocurredAt, credit, amount);
+		Event event = new Event(eventId, accountId, occurredAt, credit, amount);
 
 		AccountSummary accountSummary = new AccountSummary(event.getAccountId());
 
@@ -172,11 +172,11 @@ public class AccountSummaryTest {
 
 		String eventId = "EVT-0001";
 		String accountId = "ACC-001";
-		LocalDateTime ocurredAt = LocalDateTime.parse("2026-02-01T10:00:00");
+		LocalDateTime occurredAt = LocalDateTime.parse("2026-02-01T10:00:00");
 		EventType credit = EventType.DEBIT;
 		BigDecimal amount = new BigDecimal("1000.00");
 
-		Event event = new Event(eventId, accountId, ocurredAt, credit, amount);
+		Event event = new Event(eventId, accountId, occurredAt, credit, amount);
 
 		AccountSummary accountSummary = new AccountSummary(event.getAccountId());
 

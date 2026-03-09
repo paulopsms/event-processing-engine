@@ -5,6 +5,8 @@ import com.paulopsms.event_processing_engine.domain.service.EventProcessorServic
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.transaction.Transactional;
+
 public class ProcessEventUseCase {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -15,6 +17,7 @@ public class ProcessEventUseCase {
 		this.eventProcessorService = eventProcessorService;
 	}
 
+	@Transactional
 	public void process(Event event) {
 		this.logger.info("Processing Single Event.");
 

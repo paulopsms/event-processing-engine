@@ -47,16 +47,16 @@ public class EventProcessorServiceTest {
 	public void setup() {
 		String eventId = "EVT-0001";
 		String accountId = "ACC-001";
-		LocalDateTime ocurredAt = LocalDateTime.parse("2026-02-01T10:00:00");
+		LocalDateTime occurredAt = LocalDateTime.parse("2026-02-01T10:00:00");
 		EventType credit = EventType.CREDIT;
 		BigDecimal amount = new BigDecimal("1000.00");
 
 		EventType debit = EventType.DEBIT;
 		BigDecimal conflictAmount = new BigDecimal("300.00");
 
-		event = new Event(eventId, accountId, ocurredAt, credit, amount);
-		duplicatedEvent = new Event(eventId, accountId, ocurredAt, credit, amount);
-		conflictEvent = new Event(eventId, accountId, ocurredAt, debit, conflictAmount);
+		event = new Event(eventId, accountId, occurredAt, credit, amount);
+		duplicatedEvent = new Event(eventId, accountId, occurredAt, credit, amount);
+		conflictEvent = new Event(eventId, accountId, occurredAt, debit, conflictAmount);
 	}
 
 	@Test

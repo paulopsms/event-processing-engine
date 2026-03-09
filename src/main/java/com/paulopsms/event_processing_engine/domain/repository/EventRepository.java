@@ -13,5 +13,5 @@ public interface EventRepository {
 
 	void deleteByEventId(String eventId);
 
-	List<Event> findByAccountIdOrderByOcurredAt(String accountId);
+	List<Event> findByAccountIdOrderByOccurredAt(String accountId);
 }

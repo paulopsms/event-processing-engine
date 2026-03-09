@@ -13,7 +13,7 @@ public class Event {
 	private UUID id;
 	private String eventId;
 	private String accountId;
-	private LocalDateTime ocurredAt;
+	private LocalDateTime occurredAt;
 	private EventType type;
 	private BigDecimal amount;
 
@@ -21,11 +21,11 @@ public class Event {
 		this.id = UUID.randomUUID();
 	}
 
-	public Event(String eventId, String accountId, LocalDateTime ocurredAt, EventType type, BigDecimal amount) {
+	public Event(String eventId, String accountId, LocalDateTime occurredAt, EventType type, BigDecimal amount) {
 		this.id = UUID.randomUUID();
 		this.eventId = eventId;
 		this.accountId = accountId;
-		this.ocurredAt = ocurredAt;
+		this.occurredAt = occurredAt;
 		this.type = type;
 		this.amount = amount;
 
@@ -58,11 +58,11 @@ public class Event {
 	}
 
 	public LocalDateTime getOccurredAt() {
-		return ocurredAt;
+		return occurredAt;
 	}
 
-	public void setOcurredAt(LocalDateTime ocurredAt) {
-		this.ocurredAt = ocurredAt;
+	public void setOccurredAt(LocalDateTime occurredAt) {
+		this.occurredAt = occurredAt;
 	}
 
 	public EventType getType() {
@@ -97,7 +97,7 @@ public class Event {
 	public boolean equals(Object o) {
 		if (o == null || getClass() != o.getClass()) return false;
 		Event event = (Event) o;
-		return Objects.equals(eventId, event.eventId) && Objects.equals(accountId, event.accountId) && Objects.equals(ocurredAt, event.ocurredAt) && type == event.type && Objects.equals(amount, event.amount);
+		return Objects.equals(eventId, event.eventId) && Objects.equals(accountId, event.accountId) && Objects.equals(occurredAt, event.occurredAt) && type == event.type && Objects.equals(amount, event.amount);
 	}
 
 	@Override
@@ -105,7 +105,7 @@ public class Event {
 		return "Event{" +
 				"eventId='" + eventId + '\'' +
 				", accountId='" + accountId + '\'' +
-				", ocurredAt=" + ocurredAt +
+				", occurredAt=" + occurredAt +
 				", type=" + type +
 				", amount=" + amount +
 				'}';

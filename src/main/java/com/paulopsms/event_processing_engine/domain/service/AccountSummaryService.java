@@ -35,7 +35,7 @@ public class AccountSummaryService {
 	public void recalculateSummary(Event event) {
 		this.logger.info("Recalculating Summary for account {}", event.getAccountId());
 
-		List<Event> events = this.eventRepository.findByAccountIdOrderByOcurredAt(event.getAccountId());
+		List<Event> events = this.eventRepository.findByAccountIdOrderByOccurredAt(event.getAccountId());
 
 		this.logger.info("{} events found.", events.size());
 

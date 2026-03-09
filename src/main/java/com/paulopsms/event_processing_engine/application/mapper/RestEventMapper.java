@@ -11,7 +11,7 @@ public class RestEventMapper {
 
 		model.setEventId(request.getEventId());
 		model.setAccountId(request.getAccountId());
-		model.setOcurredAt(request.getOcurredAt());
+		model.setOccurredAt(request.getOccurredAt());
 		model.setType(request.getType());
 		model.setAmount(request.getAmount());
 

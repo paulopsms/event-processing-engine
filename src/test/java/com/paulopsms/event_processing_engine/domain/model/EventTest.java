@@ -22,16 +22,16 @@ public class EventTest {
 	public void shouldCreateEventUsingAllArgsContructorSuccessfully() {
 		String eventId = "EVT-0001";
 		String accountId = "ACC-001";
-		LocalDateTime ocurredAt = LocalDateTime.parse("2026-02-01T10:00:00");
+		LocalDateTime occurredAt = LocalDateTime.parse("2026-02-01T10:00:00");
 		EventType credit = EventType.CREDIT;
 		BigDecimal amount = new BigDecimal("1000.00");
 
-		Event event = new Event(eventId, accountId, ocurredAt, credit, amount);
+		Event event = new Event(eventId, accountId, occurredAt, credit, amount);
 
 		assertNotNull(event.getId());
 		assertEquals(eventId, event.getEventId());
 		assertEquals(accountId, event.getAccountId());
-		assertEquals(ocurredAt, event.getOccurredAt());
+		assertEquals(occurredAt, event.getOccurredAt());
 		assertEquals(credit, event.getType());
 		assertEquals(amount, event.getAmount());
 	}
@@ -40,11 +40,11 @@ public class EventTest {
 	public void whenCreatingNewEventWithNegativeAmount_shouldThrowAnException() {
 		String eventId = "EVT-0001";
 		String accountId = "ACC-001";
-		LocalDateTime ocurredAt = LocalDateTime.parse("2026-02-01T10:00:00");
+		LocalDateTime occurredAt = LocalDateTime.parse("2026-02-01T10:00:00");
 		EventType credit = EventType.CREDIT;
 		BigDecimal amount = new BigDecimal("-100.00");
 
-		BusinessRuntimeException exception = assertThrows(BusinessRuntimeException.class, () -> new Event(eventId, accountId, ocurredAt, credit, amount));
+		BusinessRuntimeException exception = assertThrows(BusinessRuntimeException.class, () -> new Event(eventId, accountId, occurredAt, credit, amount));
 
 		assertEquals("Amount must be positive.", exception.getMessage());
 	}

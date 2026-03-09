@@ -3,7 +3,7 @@ package com.paulopsms.event_processing_engine.infrastructure.adapter;
 import com.paulopsms.event_processing_engine.domain.model.Event;
 import com.paulopsms.event_processing_engine.domain.repository.EventRepository;
 import com.paulopsms.event_processing_engine.infrastructure.persistence.entity.EventEntity;
-import com.paulopsms.event_processing_engine.infrastructure.persistence.mapper.EventMapper;
+import com.paulopsms.event_processing_engine.infrastructure.persistence.mapper.PersistenceEventMapper;
 import com.paulopsms.event_processing_engine.infrastructure.persistence.repository.EventJpaRepository;
 
 import java.util.List;
@@ -13,35 +13,35 @@ import java.util.stream.Collectors;
 public class EventAdapter implements EventRepository {
 
 	private final EventJpaRepository eventJpaRepository;
-	private final EventMapper eventMapper;
 
-	public EventAdapter(EventJpaRepository eventJpaRepository, EventMapper eventMapper) {
+	public EventAdapter(EventJpaRepository eventJpaRepository) {
 		this.eventJpaRepository = eventJpaRepository;
-		this.eventMapper = eventMapper;
 	}
 
 	@Override
 	public Optional<Event> findByEventId(String eventId) {
-		return this.eventJpaRepository.findByEventId(eventId).map(this.eventMapper::toModel);
+		return this.eventJpaRepository.findByEventId(eventId).map(PersistenceEventMapper::toModel);
 	}
 
 	@Override
 	public void save(Event event) {
-		EventEntity eventEntity = this.eventMapper.toEntity(event);
+		EventEntity eventEntity = PersistenceEventMapper.toModel(event);
 
-		this.eventJpaRepository.save(eventEntity);
+		EventEntity saved = this.eventJpaRepository.save(eventEntity);
+
+		PersistenceEventMapper.toModel(saved);
 	}
 
 	@Override
 	public void deleteByEventId(String eventId) {
-		this.eventJpaRepository.deleteById(eventId);
+		this.eventJpaRepository.deleteByEventId(eventId);
 	}
 
 	@Override
-	public List<Event> findByAccountIdOrderByOcurredAt(String accountId) {
-		return this.eventJpaRepository.findByAccountIdOrderByOcurredAt(accountId)
+	public List<Event> findByAccountIdOrderByOccurredAt(String accountId) {
+		return this.eventJpaRepository.findByAccountIdOrderByOccurredAt(accountId)
 				.stream()
-				.map(this.eventMapper::toModel)
+				.map(PersistenceEventMapper::toModel)
 				.collect(Collectors.toList());
 	}
 }
