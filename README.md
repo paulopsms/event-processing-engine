@@ -1,15 +1,10 @@
-# event-processing-engine
-
-### Processador de eventos
+<h1 align="center" style="font-weight: bold;">💻 Event Processing Engine 💻</h1>
 
 Projeto desenvolvido para construção de um módulo de processamento de eventos financeiros utilizando Java 8, Spring Boot
 e princípios de Clean Architecture.
 
 O objetivo do sistema é receber eventos financeiros provenientes de múltiplas fontes,
 processá-los de forma determinística, lidar com duplicidades e conflitos, e gerar um consolidado financeiro por conta.
-
-
-<h1 align="center" style="font-weight: bold;">💻 Event Processing Engine 💻</h1>
 
 ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
 ![Amazon S3](https://img.shields.io/badge/Amazon%20S3-FF9900?style=for-the-badge&logo=amazons3&logoColor=white)
