@@ -6,13 +6,13 @@ e princípios de Clean Architecture.
 O objetivo do sistema é receber eventos financeiros provenientes de múltiplas fontes,
 processá-los de forma determinística, lidar com duplicidades e conflitos, e gerar um consolidado financeiro por conta.
 
-
 [![Java](https://img.shields.io/badge/Java-%23ED8B00.svg?logo=openjdk&logoColor=white)](#)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?logo=springboot&logoColor=fff)](#)
 
 <p align="center">
- <a href="#started">Getting Started</a> • 
-  <a href="#routes">API Endpoints</a>
+ <a href="#started">Iniciando</a> • 
+  <a href="#routes">Endpoints da Aplicação</a> • 
+  <a href="#tests">Local Tests</a>
 </p>
 
 <p align="center">
@@ -21,11 +21,11 @@ e princípios de Clean Architecture. O objetivo do sistema é receber eventos fi
 processá-los de forma determinística, lidar com duplicidades e conflitos, e gerar um consolidado financeiro por conta.</b>
 </p>
 
-<h2 id="started">🚀 Getting started</h2>
+<h2 id="started">🚀 Iniciando</h2>
 
 <h3>Prerequisites</h3>
 
-Para executar este projeto, você precisará ter instalado o Java 8 e o Maven. 
+Para executar este projeto, você precisará ter instalado o Java 8 e o Maven.
 O Projeto utiliza Banco de Dados H2, Spring-Boot 2.7.18 e JUnit5.
 
 - [Java 8](https://www.oracle.com/br/java/technologies/javase/javase8-archive-downloads.html)
@@ -43,11 +43,11 @@ git clone https://github.com/paulopsms/event-processing-engine.git
 
 Para executar a aplicação, basta aessar seu diretório e executar:
 
-```bash
+```bash 
 mvn spring-boot:run
 ``````
 
-<h2 id="routes">📍 API Endpoints</h2>
+<h2 id="routes">📍 Endpoints da Aplicação</h2>
 
 Aqui estão listados as principais rotas da aplicação e como executá-las.
 
@@ -65,11 +65,12 @@ Aqui estão listados as principais rotas da aplicação e como executá-las.
 **REQUEST**
 
 Para este teste, você pode usar o arquivo: [teste_single_processing.json](postman/teste_single_processing.json)
+
 ```json
 {
   "eventId": "EVT-0001",
   "accountId": "ACC-001",
-  "occurredAt":  "2026-02-01T10:00:00Z",
+  "occurredAt": "2026-02-01T10:00:00Z",
   "type": "CREDIT",
   "amount": 10.00
 }
@@ -85,7 +86,8 @@ Status 202 Accepted (Empty body)
 
 **REQUEST**
 
-Para o seu teste, você pode usar o arquivo: [teste_batch_processing.json](postman/teste_batch_processing.json)[teste_single_processing.json](postman/teste_single_processing.json)
+Para o seu teste, você pode usar o
+arquivo: [teste_batch_processing.json](postman/teste_batch_processing.json)[teste_single_processing.json](postman/teste_single_processing.json)
 
 ```json
 [
@@ -170,5 +172,10 @@ Empty Body
 ]
 ```
 
+<h2 id="tests"> Testes Locais</h2>
+Para testar a aplicação, também podem ser executados os testes unitários desenvolvidos com JUnit 5.
+para isto basta executar o comando 
 
-
+```
+mvn test
+```
