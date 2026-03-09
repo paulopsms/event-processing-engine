@@ -6,11 +6,9 @@ e princípios de Clean Architecture.
 O objetivo do sistema é receber eventos financeiros provenientes de múltiplas fontes,
 processá-los de forma determinística, lidar com duplicidades e conflitos, e gerar um consolidado financeiro por conta.
 
-![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
-![Amazon S3](https://img.shields.io/badge/Amazon%20S3-FF9900?style=for-the-badge&logo=amazons3&logoColor=white)
-![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
-![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 
+[![Java](https://img.shields.io/badge/Java-%23ED8B00.svg?logo=openjdk&logoColor=white)](#)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?logo=springboot&logoColor=fff)](#)
 
 <p align="center">
  <a href="#started">Getting Started</a> • 
@@ -27,7 +25,6 @@ processá-los de forma determinística, lidar com duplicidades e conflitos, e ge
 
 <h3>Prerequisites</h3>
 
-For this project to run, you'll need to have Docker and docker-compose installed.
 Para executar este projeto, você precisará ter instalado o Java 8 e o Maven. 
 O Projeto utiliza Banco de Dados H2, Spring-Boot 2.7.18 e JUnit5.
 
