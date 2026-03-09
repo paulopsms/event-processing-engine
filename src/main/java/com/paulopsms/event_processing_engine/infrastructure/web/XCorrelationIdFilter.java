@@ -1,4 +1,4 @@
-package com.paulopsms.event_processing_engine.infrastructure.logging;
+package com.paulopsms.event_processing_engine.infrastructure.web;
 
 import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
