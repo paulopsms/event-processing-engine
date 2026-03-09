@@ -1,0 +1,100 @@
+[
+  {
+    "eventId": "EVT-0001",
+    "accountId": "ACC-001",
+    "occurredAt": "2026-02-01T10:00:00Z",
+    "type": "CREDIT",
+    "amount": 1000.00
+  },
+  {
+    "eventId": "EVT-0002",
+    "accountId": "ACC-001",
+    "occurredAt": "2026-02-01T10:05:00Z",
+    "type": "DEBIT",
+    "amount": 120.50
+  },
+  {
+    "eventId": "EVT-0003",
+    "accountId": "ACC-001",
+    "occurredAt": "2026-02-01T10:07:00Z",
+    "type": "DEBIT",
+    "amount": 15.00
+  },
+  {
+    "eventId": "EVT-0004",
+    "accountId": "ACC-001",
+    "occurredAt": "2026-02-01T09:59:30Z",
+    "type": "CREDIT",
+    "amount": 50.00
+  },
+  {
+    "eventId": "EVT-0101",
+    "accountId": "ACC-002",
+    "occurredAt": "2026-02-02T08:00:00Z",
+    "type": "CREDIT",
+    "amount": 200.00
+  },
+  {
+    "eventId": "EVT-0102",
+    "accountId": "ACC-002",
+    "occurredAt": "2026-02-02T08:01:00Z",
+    "type": "DEBIT",
+    "amount": 50.00
+  },
+  {
+    "eventId": "EVT-0201",
+    "accountId": "ACC-003",
+    "occurredAt": "2026-02-03T12:10:00Z",
+    "type": "CREDIT",
+    "amount": 500.00
+  },
+  {
+    "eventId": "EVT-0202",
+    "accountId": "ACC-003",
+    "occurredAt": "2026-02-03T12:11:00Z",
+    "type": "DEBIT",
+    "amount": 50.00
+  },
+  {
+    "eventId": "EVT-1000",
+    "accountId": "ACC-001",
+    "occurredAt": "2026-02-01T10:10:00Z",
+    "type": "DEBIT",
+    "amount": 5.00
+  },
+  {
+    "eventId": "EVT-1000",
+    "accountId": "ACC-001",
+    "occurredAt": "2026-02-01T10:10:00Z",
+    "type": "DEBIT",
+    "amount": 5.00
+  },
+  {
+    "eventId": "EVT-2000",
+    "accountId": "ACC-002",
+    "occurredAt": "2026-02-02T08:03:00Z",
+    "type": "CREDIT",
+    "amount": 10.00
+  },
+  {
+    "eventId": "EVT-2000",
+    "accountId": "ACC-002",
+    "occurredAt": "2026-02-02T08:03:00Z",
+    "type": "CREDIT",
+    "amount": 11.00
+  },
+  {
+    "eventId": "EVT-0301",
+    "accountId": "ACC-001",
+    "occurredAt": "2026-02-01T10:02:30Z",
+    "type": "DEBIT",
+    "amount": 3.00
+  },
+  {
+    "eventId": "EVT-0302",
+    "accountId": "ACC-001",
+    "occurredAt": "2026-02-01T10:02:30Z",
+    "type": "DEBIT",
+    "amount": 4.00
+  }
+]
