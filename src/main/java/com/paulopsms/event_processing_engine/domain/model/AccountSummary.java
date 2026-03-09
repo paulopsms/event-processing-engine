@@ -1,7 +1,13 @@
 package com.paulopsms.event_processing_engine.domain.model;
 
+import com.paulopsms.event_processing_engine.domain.enums.IssueType;
+import com.paulopsms.event_processing_engine.shared.exception.BusinessRuntimeException;
+
 import java.math.BigDecimal;
-import java.util.Objects;
+
+import static com.paulopsms.event_processing_engine.domain.enums.IssueType.CONFLICT;
+import static com.paulopsms.event_processing_engine.domain.enums.IssueType.DUPLICATE;
+import static java.util.Objects.isNull;
 
 public class AccountSummary {
 
@@ -93,13 +99,22 @@ public class AccountSummary {
 	}
 
 	public void apply(Event event) {
-
-		Objects.requireNonNull(event, "Event is required.");
+		if (isNull(event)) throw new BusinessRuntimeException("Event is required.");
 
 		if (event.isCredit()) {
 			this.applyCredit(event);
 		} else if (event.isDebit()) {
 			this.applyDebit(event);
+		}
+	}
+
+	public void applyBalanceOnly(Event event) {
+		if (isNull(event)) throw new BusinessRuntimeException("Event is required.");
+
+		if (event.isCredit()) {
+			this.addBalance(event);
+		} else if (event.isDebit()) {
+			this.subtractBalance(event);
 		}
 	}
 
@@ -112,20 +127,17 @@ public class AccountSummary {
 	}
 
 	private void applyDebit(Event event) {
-		if (this.balanceLessThanDebitAmount(event)) {
-			this.incrementConflictEvents();
-
-			return;
-		}
+//		this.validateIfEnoughBalanceForDebit(event);
 
 		this.subtractBalance(event);
 		this.addTotalDebits(event);
 		this.incrementValidEvents();
 	}
 
-	private boolean balanceLessThanDebitAmount(Event event) {
-		return this.balance.compareTo(event.getAmount()) < 0;
-	}
+//	public void validateIfEnoughBalanceForDebit(Event event) {
+//		if (this.balance.compareTo(event.getAmount()) < 0)
+//			throw new BusinessRuntimeException("Low balance.");
+//	}
 
 	private void addTotalDebits(Event event) {
 		this.totalDebits = this.totalDebits.add(event.getAmount());
@@ -155,14 +167,8 @@ public class AccountSummary {
 		this.duplicateEvents++;
 	}
 
-
-	public void applyRollback(Event event) {
-		Objects.requireNonNull(event, "Event is required for rollback.");
-
-		if (event.isCredit()) {
-			this.applyDebit(event);
-		} else if (event.isDebit()) {
-			this.applyCredit(event);
-		}
+	public void increment(IssueType issueType) {
+		if (DUPLICATE.equals(issueType)) this.incrementDuplicate();
+		else if (CONFLICT.equals(issueType)) this.incrementConflictEvents();
 	}
 }

@@ -17,7 +17,7 @@ public class GetEventIssueService {
 		this.eventIssueRepository = eventIssueRepository;
 	}
 
-	public List<EventIssue> listAllEventIssues() {
+	public List<EventIssue> findAllEventIssues() {
 		List<EventIssue> eventIssues = this.eventIssueRepository.findAll();
 
 		this.logger.info("Listing {} Events Issues .", eventIssues.size());

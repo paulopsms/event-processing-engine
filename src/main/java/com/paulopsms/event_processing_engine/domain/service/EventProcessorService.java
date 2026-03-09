@@ -35,34 +35,46 @@ public class EventProcessorService {
 		this.logger.info("Processing event: {}",  event);
 		Optional<Event> existingEventOptional = eventRepository.findByEventId(event.getEventId());
 
-		if (!existingEventOptional.isPresent()) {
-			this.logger.info("The event {} is valid.",  event.getEventId());
+		if (!existingEventOptional.isPresent())
+			this.createNewEvent(event);
 
-			this.accountSummaryService.aggregate(event);
-
-			this.eventRepository.save(event);
-		}
 		Event existingEvent = existingEventOptional.get();
 
-		this.logger.info("Validating event deduplication: {}",  existingEvent);
+		this.validadeDeduplicationAndCreateEventIssue(event, existingEvent);
+	}
+
+	private void createNewEvent(Event event) {
+		this.logger.info("The event {} is valid.",  event.getEventId());
+
+		this.accountSummaryService.aggregate(event);
+
+		this.eventRepository.save(event);
+	}
+
+	private void validadeDeduplicationAndCreateEventIssue(Event event, Event existingEvent) {
+		this.logger.info("Validating event deduplication: {}", existingEvent);
 
 		DeduplicationResult result = this.deduplicationService.validateExistingEvent(existingEvent, event);
 
-		this.createEventIssue(event, result);
+		EventIssue eventIssue = this.createEventIssue(event, result);
+
+		this.accountSummaryService.updateCount(event, eventIssue);
 
 		if (CONFLICT.equals(result)) {
-			this.logger.info("Conflict detected. Executing rollback for event {}. ",  existingEvent);
+			this.logger.info("Conflict detected. Executing rollback for event {}. ", existingEvent);
 
 			this.rollbackEvent(event);
 		}
 	}
 
-	private void createEventIssue(Event event, DeduplicationResult result) {
+	private EventIssue createEventIssue(Event event, DeduplicationResult result) {
 		this.logger.info("Creating event issue: eventId={}, DeduplicationResult={}",  event.getEventId(), result);
 
 		EventIssue eventIssue = EventIssueFactory.createEventIssue(event.getEventId(), result);
 
 		this.saveIssue(eventIssue);
+
+		return eventIssue;
 	}
 
 	private void rollbackEvent(Event event) {

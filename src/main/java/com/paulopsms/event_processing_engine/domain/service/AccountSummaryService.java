@@ -2,8 +2,10 @@ package com.paulopsms.event_processing_engine.domain.service;
 
 import com.paulopsms.event_processing_engine.domain.model.AccountSummary;
 import com.paulopsms.event_processing_engine.domain.model.Event;
+import com.paulopsms.event_processing_engine.domain.model.EventIssue;
 import com.paulopsms.event_processing_engine.domain.repository.AccountSummaryRepository;
 import com.paulopsms.event_processing_engine.domain.repository.EventRepository;
+import com.paulopsms.event_processing_engine.shared.exception.BusinessRuntimeException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,6 +49,15 @@ public class AccountSummaryService {
 	private void recalculate(Event event, AccountSummary summary) {
 		this.logger.info("Recalculating Summary for event: {}",  event)	;
 		
-		summary.apply(event);
+		summary.applyBalanceOnly(event);
+	}
+
+	public void updateCount(Event event, EventIssue eventIssue) {
+		AccountSummary summary = this.accountSummaryRepository.findByAccountId(event.getAccountId())
+				.orElseThrow(() -> new BusinessRuntimeException("Account Summary not found."));
+
+		summary.increment(eventIssue.getType());
+
+		accountSummaryRepository.save(summary);
 	}
 }

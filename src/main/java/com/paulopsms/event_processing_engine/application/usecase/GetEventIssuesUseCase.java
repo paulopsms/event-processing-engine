@@ -21,6 +21,6 @@ public class GetEventIssuesUseCase {
 
 		this.logger.info("Listing Events Issues.");
 
-		return this.getEventIssueService.listAllEventIssues();
+		return this.getEventIssueService.findAllEventIssues();
 	}
 }
