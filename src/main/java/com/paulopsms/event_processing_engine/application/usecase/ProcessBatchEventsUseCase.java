@@ -5,6 +5,7 @@ import com.paulopsms.event_processing_engine.domain.service.EventProcessorServic
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.transaction.Transactional;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,6 +20,7 @@ public class ProcessBatchEventsUseCase {
 		this.eventProcessorService = eventProcessorService;
 	}
 
+	@Transactional
 	public void processBatch(List<Event> events) {
 		this.logger.info("Processing Batch Events.");
 
